@@ -321,6 +321,7 @@ if start:
                         st.write(v)
 
         elif image_classification and gallary:
+            # Image Gallary View.
             d = d.prepare_for_task('image-classification')
             n_cols, n_rows = 5, 10
 
@@ -335,10 +336,9 @@ if start:
                 labels.append(f"#{item} | {label_str}")
 
             n_rows = 1 + len(images) // int(n_cols)
-            rows = [st.container() for _ in range(n_rows)]
-            cols_per_row = [r.columns(n_cols) for r in rows]
-            cols = [column for row in cols_per_row for column in row]
 
+            cols_per_row = [st.beta_columns(n_cols) for _ in range(n_rows)]
+            cols = [column for row in cols_per_row for column in row]
             for idx, (image, label) in enumerate(zip(images, labels)):
                 cols[idx].image(image, caption=label)
 
