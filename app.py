@@ -10,7 +10,12 @@ import tornado
 import json
 import time
 import sys
+from git import Repo
+import os
 
+
+if not os.path.exists('datasets_clone'):
+    Repo.clone_from('https://github.com/huggingface/datasets.git', 'datasets_clone')
 
 MAX_SIZE = 40000000000
 # if len(sys.argv) > 1:
@@ -18,7 +23,7 @@ MAX_SIZE = 40000000000
 # else:
 #     path_to_datasets = None
 
-path_to_datasets = './datasets/datasets/'
+path_to_datasets = 'datasets_clone/datasets/'
 
 ## Hack to extend the width of the main pane.
 def _max_width_():
